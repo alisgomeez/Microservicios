@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  # Servicio de MongoDB
+  mongo-server:
+    image: mongo:latest
+    container_name: mongo-server
+    restart: always
+    ports:
+      - "27017:27017"   # Puerto MongoDB para el host local
+    volumes:
+      - mongodb_data:/data/db  # Persistencia de datos
+    networks:
+      - mongodb_network
+
+  # Cliente para MongoDB (Mongo Express)
+  mongo-client:
+    image: mongo-express:latest
+    container_name: mongo-client
+    restart: always
+    depends_on:
+      - mongo-server
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-server
+      - ME_CONFIG_BASICAUTH_USERNAME=root
+      - ME_CONFIG_BASICAUTH_PASSWORD=root
+      - ME_CONFIG_MONGODB_PORT=27017
+    ports:
+      - "8081:8081"   # Puerto para acceder a mongo-express en el navegador
+    networks:
+      - mongodb_network
+
+volumes:
+  mongodb_data:  # Volumen para persistir datos de MongoDB
+
+networks:
+  mongodb_network:  # Red compartida para los servicios

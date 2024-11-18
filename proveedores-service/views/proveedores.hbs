@@ -1,0 +1,23 @@
+<!-- views/proveedores.hbs -->
+{{!< main}}
+
+<h2 class="mb-4 text-center">Lista de Proveedores</h2>
+
+{{#if proveedores.length}}
+    <div class="row">
+        {{#each proveedores}}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.nombre}}</h5>
+                        <p class="card-text"><strong>Dirección:</strong> {{this.direccion}}</p>
+                        <p class="card-text"><strong>Teléfono:</strong> {{this.telefono}}</p>
+                        <p class="card-text"><strong>Email:</strong> {{this.email}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p>No hay proveedores disponibles.</p>
+{{/if}}
