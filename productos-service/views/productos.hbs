@@ -1,0 +1,23 @@
+<!-- views/productos.hbs -->
+{{!< main}}
+
+<h2 class="mb-4 text-center">Lista de Productos</h2>
+
+{{#if productos.length}}
+    <div class="row">
+        {{#each productos}}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.nombre}}</h5>
+                        <p class="card-text"><strong>Descripción:</strong> {{this.descripcion}}</p>
+                        <p class="card-text"><strong>Precio:</strong> ${{this.precio}}</p>
+                        <p class="card-text"><strong>Proveedor:</strong> {{this.proveedor}}</p>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
+    <p>No hay productos disponibles.</p>
+{{/if}}
