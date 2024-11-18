@@ -1,7 +1,7 @@
-// app.js
 import express from 'express';
 import mongoose from 'mongoose';
 import exphbs from 'express-handlebars';
+import bodyParser from 'body-parser'; 
 import proveedorRoutes from './routes/proveedorRoutes.js';
 
 const app = express();

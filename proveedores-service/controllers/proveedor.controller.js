@@ -1,10 +1,12 @@
-// controllers/proveedor.controller.js
 import Proveedor from '../models/Proveedor.js';
 
 export const renderProveedores = async (req, res) => {
     try {
         // Obtener todos los proveedores desde la base de datos
         const proveedores = await Proveedor.find();
+
+        // Verifica que proveedores se están recuperando
+        console.log(proveedores);
 
         // Renderizar una vista HTML con los proveedores
         res.render('proveedores', { proveedores });  // 'proveedores' es el nombre de la vista
