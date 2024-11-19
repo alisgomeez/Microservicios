@@ -1,85 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import AgregarProveedor from './AgregarProveedor';
 
-function Proveedores() {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    empresa: "",
-    telefono: "",
-  });
+const Proveedores = () => {
+  const [proveedores, setProveedores] = useState([]);
+  const [editarProveedor, setEditarProveedor] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  useEffect(() => {
+    fetch('http://localhost:3003/api/proveedores')
+      .then((response) => response.json())
+      .then((data) => setProveedores(data))
+      .catch((error) => console.error('Error al obtener proveedores:', error));
+  }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3003/api/proveedores", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        alert("Proveedor agregado con éxito");
-        setFormData({ nombre: "", empresa: "", telefono: "" });
-      } else {
-        alert("Error al agregar el proveedor");
-      }
-    } catch (error) {
-      console.error("Error al enviar los datos:", error);
-      alert("Error al conectar con el backend");
-    }
+  const eliminarProveedor = (id) => {
+    fetch(`http://localhost:3003/api/proveedores/${id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          setProveedores((prev) => prev.filter((proveedor) => proveedor._id !== id));
+        } else {
+          console.error('Error al eliminar proveedor');
+        }
+      })
+      .catch((error) => console.error('Error al eliminar proveedor:', error));
   };
 
   return (
-    <div className="container p-5">
-      <h1>Agregar Proveedor</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="nombre">Nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            className="form-control"
-            required
-          />
+    <div className="container my-5">
+      <h1 className="text-center mb-4">Gestión de Proveedores</h1>
+
+      <h2 className="mb-4">Lista de Proveedores</h2>
+      {proveedores.length > 0 ? (
+        <div className="row">
+          {proveedores.map((proveedor) => (
+            <div key={proveedor._id} className="col-md-4 mb-4">
+              <div className="card shadow-lg border-light rounded">
+                <div className="card-body">
+                  <h5 className="card-title text-primary">{proveedor.nombre}</h5>
+                  <p className="card-text"><strong>Dirección:</strong> {proveedor.direccion}</p>
+                  <p className="card-text"><strong>Teléfono:</strong> {proveedor.telefono}</p>
+                  <p className="card-text"><strong>Email:</strong> {proveedor.email}</p>
+                  <button
+                    className="btn btn-danger btn-sm mx-1"
+                    onClick={() => eliminarProveedor(proveedor._id)}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="mb-3">
-          <label htmlFor="empresa">Empresa</label>
-          <input
-            type="text"
-            id="empresa"
-            name="empresa"
-            value={formData.empresa}
-            onChange={handleChange}
-            className="form-control"
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="telefono">Teléfono</label>
-          <input
-            type="text"
-            id="telefono"
-            name="telefono"
-            value={formData.telefono}
-            onChange={handleChange}
-            className="form-control"
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-success">
-          Agregar Proveedor
-        </button>
-      </form>
+      ) : (
+        <p className="text-center">No hay proveedores disponibles.</p>
+      )}
+
+      <AgregarProveedor />
     </div>
   );
-}
+};
 
 export default Proveedores;

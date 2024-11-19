@@ -8,3 +8,4 @@ const router = express.Router();
 router.get('/api/productos', renderProductos);
 
 export default router;
+

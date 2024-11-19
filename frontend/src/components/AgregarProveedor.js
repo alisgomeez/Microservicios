@@ -1,72 +1,98 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-function AgregarProveedor() {
-  const [nombre, setNombre] = useState('');
-  const [empresa, setEmpresa] = useState('');
-  const [telefono, setTelefono] = useState('');
+const AgregarProveedor = () => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    direccion: '',
+    telefono: '',
+    email: '',
+  });
+
+  const [mensaje, setMensaje] = useState(''); // Mensaje para mostrar al usuario
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const proveedor = {
-      nombre,
-      empresa,
-      telefono,
-    };
-
     try {
-      await axios.post('http://localhost:3003/api/proveedores/agregar', proveedor);
-      alert('Proveedor agregado correctamente');
-      // Limpiar formulario
-      setNombre('');
-      setEmpresa('');
-      setTelefono('');
+      const response = await fetch('http://localhost:3003/proveedores/agregar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setMensaje('Proveedor agregado con éxito');
+        setFormData({ nombre: '', direccion: '', telefono: '', email: '' }); // Limpiar el formulario
+      } else {
+        setMensaje(`Error al agregar el proveedor: ${data.mensaje}`);
+      }
     } catch (error) {
-      alert('Error al agregar el proveedor');
+      console.error('Error:', error);
+      setMensaje('Hubo un error al intentar agregar el proveedor');
     }
   };
 
   return (
-    <div className="container p-5">
-      <h1>Agregar Proveedor</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="nombre">Nombre</label>
+    <div>
+      <h2>Agregar Proveedor</h2>
+      <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
+        <div>
+          <label>Nombre del Proveedor:</label>
           <input
             type="text"
-            className="form-control"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
+            name="nombre"
+            value={formData.nombre}
+            onChange={handleChange}
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="empresa">Empresa</label>
+        <div>
+          <label>Dirección:</label>
           <input
             type="text"
-            className="form-control"
-            value={empresa}
-            onChange={(e) => setEmpresa(e.target.value)}
+            name="direccion"
+            value={formData.direccion}
+            onChange={handleChange}
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="telefono">Teléfono</label>
+        <div>
+          <label>Teléfono:</label>
           <input
             type="text"
-            className="form-control"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Agregar Proveedor
-        </button>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit">Agregar Proveedor</button>
       </form>
+
+      {mensaje && <p>{mensaje}</p>} {/* Mostrar mensaje de éxito o error */}
     </div>
   );
-}
+};
 
 export default AgregarProveedor;

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import exphbs from 'express-handlebars';
 import bodyParser from 'body-parser'; 
 import proveedorRoutes from './routes/proveedorRoutes.js';
+import cors from 'cors';
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.set('view engine', 'hbs');
 // Middleware para manejar solicitudes JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.json());  // Asegurarse de que Express pueda manejar JSON
 
 // Usar las rutas de proveedores
 app.use(proveedorRoutes);
