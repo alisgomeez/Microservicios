@@ -1,4 +1,3 @@
-// controllers/producto.controller.js
 import Producto from '../models/Producto.js';
 
 export const renderProductos = async (req, res) => {
@@ -9,8 +8,8 @@ export const renderProductos = async (req, res) => {
         // Verifica que productos se están recuperando
         console.log(productos);
 
-        // Renderizar una vista HTML con los productos
-        res.render('productos', { productos });  // 'productos' es el nombre de la vista
+        // Enviar los productos como JSON
+        res.json(productos);  
     } catch (error) {
         console.log('Error al obtener los productos:', error);
         res.status(500).send('Error en el servidor');

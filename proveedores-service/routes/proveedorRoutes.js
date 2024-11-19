@@ -37,32 +37,32 @@ router.delete('/api/proveedores/:id', async (req, res) => {
     }
 });
 
-// Actualizar un proveedor
-router.put('/api/proveedores/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { nombre, direccion, telefono, email } = req.body;
+// // Actualizar un proveedor
+// router.put('/api/proveedores/:id', async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { nombre, direccion, telefono, email } = req.body;
 
-        // Verifica que los campos sean válidos
-        if (!nombre || !direccion || !telefono || !email) {
-            return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
-        }
+//         // Verifica que los campos sean válidos
+//         if (!nombre || !direccion || !telefono || !email) {
+//             return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
+//         }
 
-        const proveedorActualizado = await Proveedor.findByIdAndUpdate(
-            id,
-            { nombre, direccion, telefono, email },
-            { new: true } // Retorna el documento actualizado
-        );
+//         const proveedorActualizado = await Proveedor.findByIdAndUpdate(
+//             id,
+//             { nombre, direccion, telefono, email },
+//             { new: true } // Retorna el documento actualizado
+//         );
 
-        if (!proveedorActualizado) {
-            return res.status(404).json({ mensaje: 'Proveedor no encontrado' });
-        }
+//         if (!proveedorActualizado) {
+//             return res.status(404).json({ mensaje: 'Proveedor no encontrado' });
+//         }
 
-        res.status(200).json(proveedorActualizado);
-    } catch (error) {
-        console.error('Error al actualizar proveedor:', error);
-        res.status(500).json({ mensaje: 'Error al actualizar el proveedor', error });
-    }
-});
+//         res.status(200).json(proveedorActualizado);
+//     } catch (error) {
+//         console.error('Error al actualizar proveedor:', error);
+//         res.status(500).json({ mensaje: 'Error al actualizar el proveedor', error });
+//     }
+// });
 
 export default router;

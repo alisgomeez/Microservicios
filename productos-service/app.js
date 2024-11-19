@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
-// Importa directamente la función exphbs
-import exphbs from 'express-handlebars';  
-
-import productoRoutes from './routes/productoRoutes.js';
+import exphbs from 'express-handlebars';
+import bodyParser from 'body-parser'; 
+import productoRoutes from './routes/productoRoutes.js'; // Rutas de productos
+import cors from 'cors';
 
 const app = express();
 
@@ -21,6 +21,8 @@ app.set('view engine', 'hbs');
 // Middleware para manejar solicitudes JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.json());  // Asegurarse de que Express pueda manejar JSON
 
 // Usar las rutas de productos
 app.use(productoRoutes);
