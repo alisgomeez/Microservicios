@@ -30,7 +30,7 @@ app.use(productoRoutes);
 
 // Iniciar el servidor
 app.listen(3001, () => {
-    console.log('Servidor corriendo en puerto 3001');
+    console.log('Microservicio de productos corriendo en puerto 3001');
 });
 
 // Conexión a la base de datos MongoDB

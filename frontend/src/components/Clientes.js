@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import AgregarCliente from './AgregarCliente'; // Componente para agregar clientes
+import AgregarCliente from './AgregarCliente'; 
 
 const Clientes = () => {
   const [clientes, setClientes] = useState([]);
   const [empleados, setEmpleados] = useState([]);
 
-  // Obtener clientes y empleados al cargar el componente
+  
   useEffect(() => {
     // Obtener clientes desde la API
-    fetch('http://localhost:3006/api/clientes') // Ruta para obtener clientes
+    fetch('http://localhost:3006/api/clientes') 
       .then((response) => response.json())
       .then((data) => setClientes(data))
       .catch((error) => console.error('Error al obtener clientes:', error));
 
     // Obtener empleados desde la API
-    fetch('http://localhost:3005/api/empleados') // Ruta para obtener empleados
+    fetch('http://localhost:3005/api/empleados') 
       .then((response) => response.json())
       .then((data) => setEmpleados(data))
       .catch((error) => console.error('Error al obtener empleados:', error));
   }, []);
 
   const eliminarCliente = (id) => {
-    // Eliminar cliente mediante el ID
-    fetch(`http://localhost:3006/api/clientes/${id}`, { // Ruta para eliminar cliente
+    // Eliminar cliente con el ID
+    fetch(`http://localhost:3006/api/clientes/${id}`, { 
       method: 'DELETE',
     })
       .then((response) => {
@@ -35,7 +35,7 @@ const Clientes = () => {
       .catch((error) => console.error('Error al eliminar cliente:', error));
   };
 
-  // Función para obtener el nombre del empleado suscriptor
+  // se obtiene el nombre pprique al seleccionarlo solo se queda con el id
   const obtenerNombreEmpleado = (empleadoId) => {
     const empleado = empleados.find((e) => e._id === empleadoId);
     return empleado ? empleado.nombre : 'Empleado desconocido';
@@ -69,7 +69,7 @@ const Clientes = () => {
         <p className="text-center">No hay clientes disponibles.</p>
       )}
 
-      <AgregarCliente /> {/* Componente para agregar clientes */}
+      <AgregarCliente /> 
     </div>
   );
 };

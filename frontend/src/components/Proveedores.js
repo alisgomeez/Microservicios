@@ -3,22 +3,22 @@ import AgregarProveedor from './AgregarProveedor';
 
 const Proveedores = () => {
   const [proveedores, setProveedores] = useState([]);
-  const [editarProveedor, setEditarProveedor] = useState(null);
-
+  //obtener proveedores desde api proveedores
   useEffect(() => {
     fetch('http://localhost:3003/api/proveedores')
       .then((response) => response.json())
       .then((data) => setProveedores(data))
       .catch((error) => console.error('Error al obtener proveedores:', error));
   }, []);
-
+  
+  //funcion eliminar
   const eliminarProveedor = (id) => {
     fetch(`http://localhost:3003/api/proveedores/${id}`, {
       method: 'DELETE',
     })
       .then((response) => {
         if (response.ok) {
-          setProveedores((prev) => prev.filter((proveedor) => proveedor._id !== id));
+          setProveedores((prev) => prev.filter((proveedor) => proveedor._id !== id)); 
         } else {
           console.error('Error al eliminar proveedor');
         }

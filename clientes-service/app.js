@@ -1,8 +1,7 @@
-// app.js
 import express from 'express';
 import clienteRoutes from './routes/clienteRoutes.js'; // Asegúrate de que la ruta al archivo sea correcta
 import mongoose from 'mongoose';
-import cors from 'cors';
+import cors from 'cors'; //permite las solicitudes entre un servidor y el frontend
 
 
 const app = express();
@@ -22,7 +21,7 @@ mongoose.connect('mongodb://localhost/micros', { useNewUrlParser: true, useUnifi
 
 // Iniciar el servidor
 app.listen(3006, () => {
-    console.log('Servidor corriendo en el puerto 3006');
+    console.log('Microservicio de clientes corriendo en el puerto 3006');
 });
 
 

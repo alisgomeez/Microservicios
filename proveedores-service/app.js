@@ -7,24 +7,13 @@ import cors from 'cors';
 
 const app = express();
 
-// Configuración de Handlebars con acceso a propiedades del prototipo
-app.engine('hbs', exphbs({
-    extname: 'hbs',
-    defaultLayout: 'main',
-    runtimeOptions: {
-        allowProtoPropertiesByDefault: true,  // Permite el acceso a propiedades del prototipo
-        allowProtoMethodsByDefault: true      // Permite el acceso a métodos del prototipo
-    }
-}));
-app.set('view engine', 'hbs');
-
 // Middleware para manejar solicitudes JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.json());  // Asegurarse de que Express pueda manejar JSON
+app.use(express.json()); 
 
-// Usar las rutas de proveedores
+// Usar rutas de proveedores
 app.use(proveedorRoutes);
 
 // Conexión a la base de datos MongoDB
@@ -34,5 +23,5 @@ mongoose.connect('mongodb://localhost/micros', { useNewUrlParser: true, useUnifi
 
 // Iniciar el servidor
 app.listen(3003, () => {
-    console.log('Servidor corriendo en puerto 3003');
+    console.log('Microservicio de proveedores corriendo en puerto 3003');
 });

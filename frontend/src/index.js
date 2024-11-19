@@ -8,3 +8,4 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+//iniciaiza la app y react crea las interfaces desde componentes

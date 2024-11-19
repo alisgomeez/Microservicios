@@ -2,10 +2,10 @@ import Proveedor from '../models/Proveedor.js';
 
 export const renderProveedores = async (req, res) => {
     try {
-        // Obtener todos los proveedores desde la base de datos
+        // Obtener  los proveedores desde la base de datos
         const proveedores = await Proveedor.find();
 
-        // Verifica que proveedores se están recuperando
+        // mandar en consola los proveedores (dartos)
         console.log(proveedores);
 
         // Enviar los proveedores como JSON

@@ -4,18 +4,17 @@ import AgregarEmpleado from './AgregarEmpleado';
 const Empleados = () => {
   const [empleados, setEmpleados] = useState([]);
 
-  // Obtener empleados al cargar el componente
   useEffect(() => {
     // Obtener empleados desde la API
-    fetch('http://localhost:3005/api/empleados')  // Ruta para obtener empleados
+    fetch('http://localhost:3005/api/empleados') 
       .then((response) => response.json())
       .then((data) => setEmpleados(data))
       .catch((error) => console.error('Error al obtener empleados:', error));
   }, []);
 
   const eliminarEmpleado = (id) => {
-    // Eliminar empleado mediante el ID
-    fetch(`http://localhost:3005/api/empleados/${id}`, { // Ruta para eliminar empleado
+    // Eliminar empleado con ID
+    fetch(`http://localhost:3005/api/empleados/${id}`, { 
       method: 'DELETE',
     })
       .then((response) => {

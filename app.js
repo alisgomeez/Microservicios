@@ -5,16 +5,9 @@ import exphbs from 'express-handlebars';
 
 const app = express();
 
-// Configuración del motor de plantillas
-app.engine('hbs', exphbs({ extname: 'hbs' }));
-app.set('view engine', 'hbs');
-
-// Middleware para manejar solicitudes POST
+// Middleware 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Usar las rutas de proveedores
-app.use(proveedorRoutes);
 
 // Conexión a la base de datos MongoDB
 mongoose.connect('mongodb://localhost/micros', { useNewUrlParser: true, useUnifiedTopology: true })

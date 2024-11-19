@@ -3,8 +3,8 @@ import Empleado from '../models/Empleado.js';
 
 export const renderEmpleados = async (req, res) => {
   try {
-    const empleados = await Empleado.find(); // Obtiene todos los empleados
-    res.status(200).json(empleados); // Devuelve los empleados en formato JSON
+    const empleados = await Empleado.find(); // Obtener los empleados
+    res.status(200).json(empleados); // se necesitan devolver en formato json para que el frontend los reconozca
   } catch (error) {
     console.error('Error al obtener empleados:', error);
     res.status(500).json({ mensaje: 'Error en el servidor' });

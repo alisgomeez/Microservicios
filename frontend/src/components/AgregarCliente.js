@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 const AgregarCliente = () => {
-  // Estados para los campos del formulario
+  // campos que necesita el cliente
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
   const [telefono, setTelefono] = useState('');
-  const [empleado, setEmpleado] = useState(''); // Para almacenar el ID del empleado seleccionado
+  const [empleado, setEmpleado] = useState(''); // almacena el ID del empleado seleccionado
   const [empleados, setEmpleados] = useState([]); // Para almacenar la lista de empleados
   const [mensaje, setMensaje] = useState(''); // Para mostrar mensaje de éxito o error
 
-  // Obtener la lista de empleados desde la API
+  //lista de empleados desde la API
   useEffect(() => {
     const fetchEmpleados = async () => {
       try {
@@ -24,17 +24,19 @@ const AgregarCliente = () => {
     fetchEmpleados();
   }, []);
 
-  // Función para manejar el envío del formulario
+  // enviar datos al form
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Evitar el refresco de la página
+    e.preventDefault(); // para no refrescar  la página
 
     const nuevoCliente = {
       nombre,
       apellido,
       telefono,
-      empleado, // Enviar el ID del empleado asociado
+      empleado, // se envia id del emple
     };
 
+    // enviar datos al API para agregar el cliente se envia a la url de la api 
+    //body hace que nuevo cliente se pase ne formato json
     try {
       const response = await fetch('http://localhost:3006/api/clientes/agregar', {
         method: 'POST',

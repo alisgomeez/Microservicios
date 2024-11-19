@@ -56,6 +56,9 @@ const AgregarProducto = () => {
     <div className="container my-5">
       <h2 className="text-center mb-4">Agregar Producto</h2>
 
+      {/* Mostrar mensaje de éxito o error en alerta azul */}
+      {mensaje && <div className="alert alert-info">{mensaje}</div>}
+
       {/* Formulario */}
       <form onSubmit={handleSubmit} className="form-group shadow-lg p-4 rounded bg-light">
         <div className="mb-3">
@@ -114,9 +117,6 @@ const AgregarProducto = () => {
 
         <button type="submit" className="btn btn-primary btn-block">Agregar Producto</button>
       </form>
-
-      {/* Mensaje de éxito o error */}
-      {mensaje && <p className="mt-4 text-center">{mensaje}</p>}
     </div>
   );
 };

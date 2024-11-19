@@ -1,6 +1,6 @@
 // app.js
 import express from 'express';
-import empleadoRoutes from './routes/empleadoRoutes.js'; // Asegúrate de que la ruta al archivo sea correcta
+import empleadoRoutes from './routes/empleadoRoutes.js';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost/micros', { useNewUrlParser: true, useUnifi
 
 // Iniciar el servidor
 app.listen(3005, () => {
-    console.log('Servidor corriendo en el puerto 3005');
+    console.log('Microservicio de empleados corriendo en el puerto 3005');
 });
 
 

@@ -1,6 +1,5 @@
-// models/Cliente.js
 import mongoose from 'mongoose';
-
+//estructura de la tabla clientes
 const clienteSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   apellido: { type: String, required: true },

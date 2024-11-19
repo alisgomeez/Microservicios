@@ -5,24 +5,23 @@ const Productos = () => {
   const [productos, setProductos] = useState([]);
   const [proveedores, setProveedores] = useState([]);
 
-  // Obtener productos y proveedores al cargar el componente
   useEffect(() => {
     // Obtener productos desde la API
-    fetch('http://localhost:3001/api/productos')  // Ruta para obtener productos
+    fetch('http://localhost:3001/api/productos')  
       .then((response) => response.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error('Error al obtener productos:', error));
 
     // Obtener proveedores desde la API
-    fetch('http://localhost:3003/api/proveedores')  // Ruta para obtener proveedores
+    fetch('http://localhost:3003/api/proveedores')  
       .then((response) => response.json())
       .then((data) => setProveedores(data))
       .catch((error) => console.error('Error al obtener proveedores:', error));
   }, []);
 
   const eliminarProducto = (id) => {
-    // Eliminar producto mediante el ID
-    fetch(`http://localhost:3001/api/productos/${id}`, { // Ruta para eliminar producto
+    // Eliminar producto conm ID
+    fetch(`http://localhost:3001/api/productos/${id}`, { 
       method: 'DELETE',
     })
       .then((response) => {
@@ -35,7 +34,7 @@ const Productos = () => {
       .catch((error) => console.error('Error al eliminar producto:', error));
   };
 
-  // Función para obtener el nombre del proveedor
+  // Función para savar nombre del proveedor porque solo sale ell id
   const obtenerNombreProveedor = (proveedorId) => {
     const proveedor = proveedores.find(p => p._id === proveedorId);
     return proveedor ? proveedor.nombre : 'Proveedor desconocido';
@@ -43,9 +42,8 @@ const Productos = () => {
 
   return (
     <div className="container my-5">
-      <h1 className="text-center mb-4">Gestión de Productos</h1>
+      <h1 className="text-center mb-4">Lista de Productos</h1>
 
-      <h2 className="mb-4">Lista de Productos</h2>
       {productos.length > 0 ? (
         <div className="row">
           {productos.map((producto) => (

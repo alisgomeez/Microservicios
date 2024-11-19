@@ -1,10 +1,10 @@
 import express from 'express';
-import Producto from '../models/Producto.js'; // Cambiar a modelo Producto
-import { renderProductos } from '../controllers/producto.controller.js'; // Controlador Producto
+import Producto from '../models/Producto.js'; 
+import { renderProductos } from '../controllers/producto.controller.js'; 
 
 const router = express.Router();
 
-// Ruta para obtener los productos
+//  obtener los productosde en la api (localhost:3001/api/productos)
 router.get('/api/productos', renderProductos);
 
 // Ruta para agregar un producto

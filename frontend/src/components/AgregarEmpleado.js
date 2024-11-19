@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const AgregarEmpleado = () => {
-  // Estados para los campos del formulario
+  //campos de empleados los que necesita
   const [nombre, setNombre] = useState('');
   const [area, setArea] = useState('');
   const [sueldo, setSueldo] = useState('');
   const [sucursal, setSucursal] = useState('');
-  const [mensaje, setMensaje] = useState(''); // Para mostrar mensaje de éxito o error
+  const [mensaje, setMensaje] = useState(''); //  mostrar mensaje
 
-  // Función para manejar el envío del formulario
+  // enviar datos
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evitar el refresco de la página
 

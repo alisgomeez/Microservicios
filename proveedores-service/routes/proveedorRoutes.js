@@ -3,7 +3,7 @@ import { renderProveedores } from '../controllers/proveedor.controller.js';
 import Proveedor from '../models/Proveedor.js';
 
 const router = express.Router();
-
+//muestra en esa pagina los proveedores
 router.get('/api/proveedores', renderProveedores);
 
 // Ruta para agregar un proveedor
