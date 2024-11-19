@@ -27,12 +27,13 @@ app.use(express.json());  // Asegurarse de que Express pueda manejar JSON
 // Usar las rutas de productos
 app.use(productoRoutes);
 
-// Conexión a la base de datos MongoDB
-mongoose.connect('mongodb://localhost/micros', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Conectado a la base de datos'))
-    .catch((err) => console.log('Error de conexión a la base de datos:', err));
 
 // Iniciar el servidor
 app.listen(3001, () => {
     console.log('Servidor corriendo en puerto 3001');
 });
+
+// Conexión a la base de datos MongoDB
+mongoose.connect('mongodb://localhost/micros', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Conectado a la base de datos'))
+    .catch((err) => console.log('Error de conexión a la base de datos:', err));
